@@ -1,0 +1,14 @@
+C:\ProjectC#\MedianFilterTestWork\bin\Debug\net9.0\MedianFilterTestWork.exe
+C:\ProjectC#\MedianFilterTestWork\bin\Debug\net9.0\MedianFilterTestWork.deps.json
+C:\ProjectC#\MedianFilterTestWork\bin\Debug\net9.0\MedianFilterTestWork.runtimeconfig.json
+C:\ProjectC#\MedianFilterTestWork\bin\Debug\net9.0\MedianFilterTestWork.dll
+C:\ProjectC#\MedianFilterTestWork\bin\Debug\net9.0\MedianFilterTestWork.pdb
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.GeneratedMSBuildEditorConfig.editorconfig
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.AssemblyInfoInputs.cache
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.AssemblyInfo.cs
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.csproj.CoreCompileInputs.cache
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.dll
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\refint\MedianFilterTestWork.dll
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.pdb
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.genruntimeconfig.cache
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\ref\MedianFilterTestWork.dll
