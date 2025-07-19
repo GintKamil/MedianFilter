@@ -12,3 +12,4 @@ C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\refint\MedianFilterTestWork.d
 C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.pdb
 C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.genruntimeconfig.cache
 C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\ref\MedianFilterTestWork.dll
+C:\ProjectC#\MedianFilterTestWork\obj\Debug\net9.0\MedianFilterTestWork.sourcelink.json

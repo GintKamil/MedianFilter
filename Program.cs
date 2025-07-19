@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MedianFilterTestWork;
+using System;
+using System.Text;
 
 internal class Program {
     static void Main()
@@ -8,18 +10,18 @@ internal class Program {
         Console.WriteLine("Исходная матрица");
         Console.WriteLine(OutputMatrix(matrix));
 
-        MedianFilter(ref matrix);
+        MedianFilter(matrix);
 
         Console.WriteLine("Медианная фильтрация");
         Console.WriteLine(OutputMatrix(matrix));
 
     }
 
-    static void MedianFilter(ref RGB[][] matrix) // Основной метод для фильтрации
+    static void MedianFilter(RGB[][] matrix) // Основной метод для фильтрации
     {
-        List<byte> RedList = RedFilter(matrix); // Разделение красного от общего
-        List<byte> GreenList = GreenFilter(matrix); // Разделение зеленого от общего
-        List<byte> BlueList = BlueFilter(matrix); // Разделение синего от общего
+        List<byte> RedList = GetColorList(matrix, pixel => pixel.Red); // Разделение красного от общего
+        List<byte> GreenList = GetColorList(matrix, pixel => pixel.Green); // Разделение зеленого от общего
+        List<byte> BlueList = GetColorList(matrix, pixel => pixel.Blue); // Разделение синего от общего
 
         byte[] ModifiedRedArray = ArrayOfAverageColorValues(RedList); // Массив медиан красного
         byte[] ModifiedGreenArray = ArrayOfAverageColorValues(GreenList); // Массив медиан зеленого
@@ -37,103 +39,56 @@ internal class Program {
         }
     }
 
-    struct RGB { // Структура для пикселя
-        public byte Red;
-        public byte Green;
-        public byte Blue;
-
-        public RGB(byte red, byte green, byte blue)
-        {
-            Red = red;
-            Green = green;
-            Blue = blue;
-        }
-
-        public override string ToString()
-        {
-            return $"({Red}, {Green}, {Blue})";
-        }
-    }
-
-    static List<byte> RedFilter(RGB[][] matrix) // Получение List разделённого от общего Red
+    static List<byte> GetColorList(RGB[][] matrix, Func<RGB, byte> colorSelector) // Метод для получения list цвета
     {
-        List<byte> colorList = new List<byte>();
+        var colorList = new List<byte>();
         for (int i = 0; i < matrix.Length; i++)
             for (int j = 0; j < matrix[i].Length; j++)
-                colorList.Add(matrix[i][j].Red);
+                colorList.Add(colorSelector(matrix[i][j]));
         return colorList;
     }
 
-    static List<byte> GreenFilter(RGB[][] matrix) // Получение List разделённого от общего Green
-    {
-        List<byte> colorList = new List<byte>();
-        for (int i = 0; i < matrix.Length; i++)
-            for (int j = 0; j < matrix[i].Length; j++)
-                colorList.Add(matrix[i][j].Green);
-        return colorList;
-    }
-
-    static List<byte> BlueFilter(RGB[][] matrix) // Получение List разделённого от общего Blue
-    {
-        List<byte> colorList = new List<byte>();
-        for (int i = 0; i < matrix.Length; i++)
-            for (int j = 0; j < matrix[i].Length; j++)
-                colorList.Add(matrix[i][j].Blue);
-        return colorList;
-    }
-
-    static byte[] ArrayOfAverageColorValues(List<byte> ColorList) // Метод для получения массива медиан одного из канал (Red, Green, Blue)
+    static byte[] ArrayOfAverageColorValues(List<byte> ColorList) // Метод для получения массива медиан одного из канала (Red, Green, Blue)
     {
         byte[] resultArray = new byte[ColorList.Count];
 
-        byte[] IntermediateArray = new byte[3];
+        for (int i = 1; i < ColorList.Count - 1; i++)
+            resultArray[i] = MedianOfThree(ColorList[i - 1], ColorList[i], ColorList[i + 1]); // Определяем медиану выборки
 
-        for (int i = 0; i < ColorList.Count; i++)
-        {
-            if (i == 0) // Для первого и последнего элемента в выборку идут только 2 элемента
-            {
-                IntermediateArray[0] = ColorList[0];
-                IntermediateArray[1] = ColorList[1];
-            }
-            else if (i == ColorList.Count - 1)
-            {
-                IntermediateArray[0] = ColorList[i - 1];
-                IntermediateArray[1] = ColorList[i];
-            }
-            else
-            {
-                IntermediateArray[0] = ColorList[i - 1];
-                IntermediateArray[1] = ColorList[i];
-                IntermediateArray[2] = ColorList[i + 1];
-            }
-            resultArray[i] = AverageColorValue(IntermediateArray); // Определяем медиану выборки
-        }
+        resultArray[0] = (byte)((ColorList[0] + ColorList[1]) / 2);
+        resultArray[^1] = (byte)((ColorList[^1] + ColorList[^2]) / 2);
         return resultArray;
     }
 
-    static byte AverageColorValue(byte[] ColorArray) // Метод для вычисления медианы выборки из 3 элементов
+    static byte MedianOfThree(byte a, byte b, byte c) // Метод для нахождения среднего числа из 3 элементов
     {
-        byte result;
-        if (ColorArray[2] == 0) result = (byte)((ColorArray[0] + ColorArray[1]) / 2);
-        else
-        {
-            Array.Sort(ColorArray);
-            result = ColorArray[1];
-        }
-        return result;
+        if (a > b) (a, b) = (b, a);
+        if (b > c) (b, c) = (c, b);
+        if (a > b) (a, b) = (b, a);
+        return b;
     }
 
     static RGB[][] InputMatrix() // Ввод матрицы
     {
-        Console.WriteLine("Введите размер матрицы N*N");
-        int length = int.Parse(Console.ReadLine());
+        Console.WriteLine("Введите размер матрицы N*M (введите через пробел два числа)");
+        string[] s = Console.ReadLine().Split();
+        int n = int.Parse(s[0]), m = int.Parse(s[1]);
+        Console.WriteLine("Выберите вид заполнения массива:\n1. Ручной ввод\n2. Рандомный ввод\nНапишите цифру (если будет написано число не 1 или не 2, то по умолчанию рандомный ввод)");
+        int way = int.Parse(Console.ReadLine());
+        RGB[][] matrix = new RGB[n][];
+
+        return way == 1 ? InputMatrixManualEntry(n, m) : InputMatrixRandom(n, m);
+    }
+
+    static RGB[][] InputMatrixManualEntry(int n, int m) // Ручной ввод матрицы
+    {
+        RGB[][] matrix = new RGB[n][];
         Console.WriteLine("Теперь ввод данных для каждого пикселя.\nДанный для каждого вводить через пробел, без пробела в начале и в конце (Например - '10 41 87')");
-        RGB[][] matrix = new RGB[length][];
         int countMatrix = 0;
-        for(int i = 0; i < length; i++)
+        for (int i = 0; i < n; i++)
         {
-            matrix[i] = new RGB[length];
-            for(int j = 0; j < length; j++)
+            matrix[i] = new RGB[m];
+            for (int j = 0; j < m; j++)
             {
                 Console.WriteLine($"Введите значение для {countMatrix + 1} элемента");
                 string[] str = Console.ReadLine().Split();
@@ -143,17 +98,31 @@ internal class Program {
         return matrix;
     }
 
+    static RGB[][] InputMatrixRandom(int n, int m) // Рандомный ввод матрицы
+    {
+        RGB[][] matrix = new RGB[n][];
+        Random random = new Random();
+        for (int i = 0; i < n; i++)
+        {
+            matrix[i] = new RGB[m];
+            for (int j = 0; j < m; j++)
+                matrix[i][j] = new RGB((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
+        }
+        return matrix;
+    }
+
     static string OutputMatrix(RGB[][] matrix) // Вывод матрицы
     {
+        StringBuilder sb = new();
         for (int i = 0; i < matrix.Length; i++)
         {
-            Console.Write("[ ");
+            sb.Append("[ ");
             for (int j = 0; j < matrix[i].Length; j++)
             {
-                Console.Write(matrix[i][j].ToString() + " ");
+                sb.Append(matrix[i][j].ToString() + " ");
             }
-            Console.WriteLine(" ]");
+            sb.AppendLine("]");
         }
-        return "\n";
+        return sb.ToString();
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MedianFilterTestWork")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c53a13c8a21ddfaa1fb450170abc63be214e021c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba22f465e0a31b4497cdec224c55a2db3e7dc48b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MedianFilterTestWork")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MedianFilterTestWork")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{477B2237-8796-4CC7-850E-580BEA5A6631}|MedianFilterTestWork.csproj|c:\\projectc#\\medianfiltertestwork\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{477B2237-8796-4CC7-850E-580BEA5A6631}|MedianFilterTestWork.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{477B2237-8796-4CC7-850E-580BEA5A6631}|MedianFilterTestWork.csproj|c:\\projectc#\\medianfiltertestwork\\rgbstruct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{477B2237-8796-4CC7-850E-580BEA5A6631}|MedianFilterTestWork.csproj|solutionrelative:rgbstruct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RGBStruct.cs",
+              "DocumentMoniker": "C:\\ProjectC#\\MedianFilterTestWork\\RGBStruct.cs",
+              "RelativeDocumentMoniker": "RGBStruct.cs",
+              "ToolTip": "C:\\ProjectC#\\MedianFilterTestWork\\RGBStruct.cs",
+              "RelativeToolTip": "RGBStruct.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T20:21:11.182Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +41,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\ProjectC#\\MedianFilterTestWork\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAQwBEAAABHAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-08T16:49:44.984Z",
               "EditorCaption": ""
